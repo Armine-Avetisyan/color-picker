@@ -1,0 +1,143 @@
+
+h1{
+  font-family: 'WindSong', cursive;
+  color: darkblue;
+  font-size: 55px;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 0px;
+}
+h2{
+  font-family: 'WindSong', cursive;
+  color: darkblue;
+}
+.canvas-component {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin: auto 100px;
+  height: auto;
+}
+
+.controls-panel {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 1 1 100%;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  min-height: 40px;
+}
+
+.circles-container {
+  display: flex;
+  flex-flow: row wrap;
+  margin: auto auto;
+  width: 380px;
+}
+
+.projects-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-height: 40px;
+}
+
+.project {
+  display: flex;
+  margin-left: 5px;
+  padding: 8px;
+  align-items: center;
+
+}
+
+.circles-container.container-100 {
+  width: 280px;
+}
+
+.circles-container.container-225 {
+  width: 420px;
+}
+
+.container-400 {
+  width: 560px;
+}
+
+.button-generate {
+  margin-left: 10px;
+
+}
+
+
+.picker-wrapper {
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border: 2px solid darkblue;
+  margin-left: 10px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.picker-inner {
+  display: flex;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  border-radius: 30px;
+
+}
+
+.picker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 30px;
+  opacity: 0;
+}
+
+.button-reset {
+  margin-left: 10px;
+}
+
+.button-fill-all {
+  margin-left: 10px;
+}
+
+.size-selector {
+  width: 60px;
+}
+
+.size-selector, .button-generate, .button-reset, .button-fill-all, .project, .project > button {
+  height: 35px;
+  background-color: white;
+  border: 2px solid darkblue;
+  border-radius: 10px;
+  color: darkblue;
+  font-size: 20px;
+  font-family: NSimSun;
+  outline: none;
+}
+
+input[type="text"]{
+  margin-left: 5px;
+  height: 25px;
+  border: 2px solid darkblue;
+  border-radius: 10px;
+  color: darkblue;
+  font-size: 20px;
+  font-family: NSimSun;
+  outline: none;
+}
+
+.project > button{
+  margin-left: 5px;
+}
+
