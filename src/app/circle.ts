@@ -1,6 +1,7 @@
 import {ICircle} from "./interfaces/circle.interface";
+import {IProject} from "./interfaces/project.interface";
 
-export class Circle {
+export class Circle implements ICircle{
   id:number
   uid: string;
   color: string;
@@ -12,7 +13,7 @@ export class Circle {
 };
 
 
-export class SaveLocalStorage{
+export class Project implements IProject{
   id: string
   name: string
   circles: ICircle[]

@@ -3,7 +3,7 @@ import {ICircle} from "../interfaces/circle.interface";
 import {ECircleCount} from "../enums/circle-count.enum";
 import {LocalStorageService} from "../services/storage.service";
 import {IProject} from "../interfaces/project.interface";
-import {Circle, SaveLocalStorage} from "../circle";
+import {Circle, Project} from "../circle";
 
 @Component({
   selector: 'app-canvas',
@@ -12,6 +12,7 @@ import {Circle, SaveLocalStorage} from "../circle";
 })
 export class CanvasComponent implements OnInit {
   circles: ICircle[] = [];
+  selectedProject = {};
   projectName: string = '';
   projectList: IProject[] = [];
   projectListName = 'circlesProject';
@@ -35,15 +36,13 @@ export class CanvasComponent implements OnInit {
   }
 
   onSizeSelect(): void {
+    this.selectedProject = {} as IProject;
     this.circles = [];
   }
 
   onCircleClick(circle: ICircle): void {
-    if (this.circles[circle.id].color === this.currentColor){
-      this.circles[circle.id].color = "";
-    } else {
-      this.circles[circle.id].color = this.currentColor;
-    }
+    this.circles[circle.id].color = this.currentColor !== circle.color ?
+                                      this.currentColor : "";
 
   }
 
@@ -77,17 +76,21 @@ export class CanvasComponent implements OnInit {
     return String(Date.now());
   }
 
+  saveProjects() {
+    const projectsStr = JSON.stringify(this.projectList);
+    return this.storage.set(this.projectListName, projectsStr);
+  }
+
   onSave(): void {
     if (this.isEmpty(this.circles) || !this.projectName) {
       return;
     }
-    this.projectList.push(new SaveLocalStorage(
+    this.projectList.push(new Project(
       this.newId(),
       this.projectName,
        this.circles,
     ))
-    const projectsStr = JSON.stringify(this.projectList);
-    this.storage.set(this.projectListName, projectsStr);
+    this.saveProjects();
     this.projectName = "";
   }
 
@@ -99,20 +102,22 @@ export class CanvasComponent implements OnInit {
   }
 
   selectProject(project: IProject): void {
+    this.selectedProject = project;
     this.circles = project.circles;
     this.selectedSize = project.circles.length;
   }
 
   onDelete(proj: IProject):void {
-    this.projectList.forEach((item,index) => {
-      if(item.id === proj.id) {
-        this.circles = [];
-        this.projectList.splice(index, 1);
-        this.storage.set(this.projectListName, JSON.stringify(this.projectList));
-      }
-      if (this.projectList.length === 0){
-        this.storage.removeAll()
-      }
-    })
+    if (proj === this.selectedProject) {
+      this.selectedProject = {};
+    }
+    this.projectList = this.projectList.filter(item => {
+     return  item.id !== proj.id;
+      })
+    this.circles = [];
+    this.saveProjects();
+    if (this.projectList.length === 0){
+      this.storage.removeAll()
+    }
   }
 }
